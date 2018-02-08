@@ -161,11 +161,11 @@ module.exports = {
             use: [
               require.resolve('style-loader'),
               {
-                loader: require.git resolve('css-loader'),
+                loader: require.resolve('css-loader'),
                 options: {
                   importLoaders: 1,
                   modules: true,
-                  localIdentName: '[name]__[local]__[has'
+                  localIdentName: '[name]__[local]__[hash:base64:5]'
                 },
               },
               {

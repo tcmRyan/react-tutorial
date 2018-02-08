@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 // import Radium, { StyleRoot } from 'radium';
 
@@ -53,20 +53,9 @@ class App extends Component {
     };
 
   render() {
-      const style = {
-          backgroundColor: 'green',
-          color: 'white',
-          font: 'inherit',
-          border: '1px solid blue',
-          padding: '8px',
-          cursor: 'pointer',
-          // ':hover': {
-          //     backgroundColor: 'lightgreen',
-          //     color: 'black'
-          // }
-      };
 
       let persons = null;
+      let btnClass = '';
       if ( this.state.showPersons ){
           persons = (
               <div>
@@ -81,27 +70,22 @@ class App extends Component {
                   })}
               </div>
           );
-
-          style.backgroundColor = 'red';
-          // style[':hover'] = {
-          //     backgroundColor: 'salmon',
-          //     color: 'black'
-          // }
+          btnClass = classes.Red
       }
-      // let classes = ['red', 'bold'].join(' ');
-      let classes = [];
+
+      let assigned_classes = [];
       if (this.state.persons.length <= 2) {
-          classes.push('red');
+          assigned_classes.push( classes.red );
       }
       if (this.state.persons.length <=1) {
-          classes.push('bold');
+          assigned_classes.push( classes.bold );
       }
 
     return (
         //<StyleRoot>
-          <div className="App">
-              <p className={classes.join(' ')}>This is really working</p>
-              <button style={style} onClick={this.togglePersonHandler}>Toggle Person</button>
+          <div className={classes.App}>
+              <p className={assigned_classes.join(' ')}>This is really working</p>
+              <button className={btnClass} onClick={this.togglePersonHandler}>Toggle Person</button>
               {persons}
           </div>
         // </StyleRoot>
