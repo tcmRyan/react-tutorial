@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 // import Radium, { StyleRoot } from 'radium';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+// import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
     state = {
@@ -55,43 +56,30 @@ class App extends Component {
   render() {
 
       let persons = null;
-      let btnClass = '';
+
       if ( this.state.showPersons ){
           persons = (
-              <div>
-                  {this.state.persons.map((person, index) => {
-                      return <ErrorBoundary key={ person.id }><Person
-                          click={() => this.deletePersonHandler(index)}
-                          name={ person.name }
-                          age={ person.age }
-
-                          changed={(event) => this.nameChangedHandler(event, person.id)}
-                      /></ErrorBoundary>
-                  })}
-              </div>
+            <Persons
+              persons={this.state.persons}
+              changed={this.nameChangedHandler}
+              clicked={this.deletePersonHandler}
+            />
           );
-          btnClass = classes.Red
-      }
 
-      let assigned_classes = [];
-      if (this.state.persons.length <= 2) {
-          assigned_classes.push( classes.red );
-      }
-      if (this.state.persons.length <=1) {
-          assigned_classes.push( classes.bold );
       }
 
     return (
-        //<StyleRoot>
           <div className={classes.App}>
-              <p className={assigned_classes.join(' ')}>This is really working</p>
-              <button className={btnClass} onClick={this.togglePersonHandler}>Toggle Person</button>
-              {persons}
+            <Cockpit
+              appTitle={this.props.title}
+              showPersons={this.state.showPersons}
+              persons={this.state.persons}
+              clicked={this.togglePersonHandler}
+            />
+            {persons}
           </div>
-        // </StyleRoot>
     );
   }
 }
 
-// export default Radium(App);
 export default App;
